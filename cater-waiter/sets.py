@@ -1,3 +1,5 @@
+""" this is blah blah blah """
+
 from sets_categories_data import (VEGAN,
                                   VEGETARIAN,
                                   KETO,
@@ -23,7 +25,7 @@ def check_drinks(drink_name, drink_ingredients):
         "tequila",
         "bourbon"
     }
-    return drink_name + (" Cocktail" if any([any([drink in ingredient.lower().split(" ") for drink in alcoholic]) for ingredient in drink_ingredients]) else " Mocktail")
+    return drink_name + (" Cocktail" if any(any(drink in ingredient.lower().split(" ") for drink in alcoholic) for ingredient in drink_ingredients) else " Mocktail")
 
 
 def categorize_dish(dish_name, dish_ingredients):
@@ -37,12 +39,13 @@ def categorize_dish(dish_name, dish_ingredients):
         "SPECIAL_INGREDIENTS": SPECIAL_INGREDIENTS
     }
     for category, category_ingredients in categories.items():
-        if all([dish_ingredient in category_ingredients for dish_ingredient in dish_ingredients]):
+        if all(dish_ingredient in category_ingredients for dish_ingredient in dish_ingredients):
             return dish_name + ": " + category
+    return None
 
 
 def tag_special_ingredients(dish):
-    return dish[0], {i for i in set(dish[1]) if i in SPECIAL_INGREDIENTS}
+    return dish[0], {item for item in set(dish[1]) if item in SPECIAL_INGREDIENTS}
 
 
 def compile_ingredients(dishes):
